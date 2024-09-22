@@ -87,7 +87,7 @@ public sealed class PopupOverlay : Overlay
         {
             var mapPos = popup.InitialPos.ToMap(_entManager, _transform);
 
-            if (mapPos.MapId != args.MapId)
+            if (mapPos.MapId > args.MapId)
                 continue;
 
             var distance = (mapPos.Position - ourPos).Length();

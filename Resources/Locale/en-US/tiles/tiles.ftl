@@ -1,4 +1,5 @@
 tiles-space = space
+tiles-gap = gap
 tiles-plating = plating
 tiles-lattice = lattice
 tiles-lattice-train = train lattice
@@ -128,3 +129,4 @@ tiles-jungle-astro-grass = jungle astro-grass
 tiles-astro-ice = astro-ice
 tiles-astro-snow = astro-snow
 tiles-wood-large = large wood
+tiles-rogue-dark-dirt = dirt

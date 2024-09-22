@@ -48,6 +48,8 @@
   - type: Tag
     tags:
     - BypassInteractionRangeChecks
+  - type: Fallable
+    preventFalls: true
 
 - type: entity
   id: ActionGhostBoo

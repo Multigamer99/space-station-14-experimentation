@@ -6,7 +6,7 @@
 
 - files: ["barratry.yml"]
   authors: Emogarbage, Scribbles0
- 
+
 - files: ["box.yml"]
   authors: ACJM, Emisse
 
@@ -54,3 +54,6 @@
 
 - files: ["cog.yml"]
   authors: Spacemann
+
+- files: ["devmapzlevel.yml", "devmapzlevel1.yml", "devmapzlevel2.yml", "devmapzlevel3.yml"]
+  authors: Vrell

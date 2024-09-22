@@ -125,7 +125,7 @@ namespace Content.Server.Mapping
             _map.SetMapPaused(mapId, true);
 
             if (args.Length == 2)
-                shell.WriteLine(Loc.GetString("cmd-mapping-success-load",("mapId",mapId),("path", args[1])));
+                shell.WriteLine(Loc.GetString("cmd-mapping-success-load", ("mapId", mapId), ("path", args[1])));
             else
                 shell.WriteLine(Loc.GetString("cmd-mapping-success", ("mapId", mapId)));
         }

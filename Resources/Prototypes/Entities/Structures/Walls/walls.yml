@@ -84,6 +84,7 @@
   - type: IconSmooth
     key: bricks
     base: brick
+  - type: ZClimbable
 
 - type: entity
   parent: BaseWall
@@ -185,7 +186,8 @@
         acts: [ "Destruction" ]
   - type: IconSmooth
     key: walls
-    base: meat
+    base:
+  - type: ZClimbable
 
 - type: entity
   parent: BaseWall
@@ -674,6 +676,7 @@
   - type: IconSmooth
     key: walls
     base: sandstone
+  - type: ZClimbable
 
 - type: entity
   parent: BaseWall
@@ -1069,6 +1072,7 @@
   - type: IconSmooth
     key: woods
     base: wood
+  - type: ZClimbable
 
 - type: entity
   parent: BaseWall
@@ -1113,6 +1117,7 @@
   - type: Construction
     graph: WebStructures
     node: wall
+  - type: ZClimbable
 
 
 # Lavalend Walls
@@ -1322,6 +1327,7 @@
   - type: IconSmooth
     key: cobblebricks
     base: cobblebrick
+  - type: ZClimbable
 
 - type: entity
   parent: WallCobblebrick

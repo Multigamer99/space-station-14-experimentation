@@ -1358,6 +1358,7 @@
   - 1.0
   baseTurf: Plating
   isSubfloor: false
+  allowLightPass: true
   deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
@@ -1376,6 +1377,7 @@
   - 1.0
   baseTurf: Plating
   isSubfloor: false
+  allowLightPass: true
   deconstructTools: [ Prying ]
   footstepSounds:
     collection: FootstepTile
@@ -1450,6 +1452,18 @@
   id: FloorGrass
   name: tiles-planet-grass-floor
   sprite: /Textures/Tiles/grass.png
+  baseTurf: FloorDirt
+  isSubfloor: true
+  footstepSounds:
+    collection: FootstepGrass
+  itemDrop: FloorTileItemGrass
+  heatCapacity: 10000
+  weather: true
+
+- type: tile
+  id: FloorRogueDarkDirt
+  name: tiles-rogue-dark-dirt
+  sprite: /Textures/Tiles/Rogue/Natural/darkdirt.rsi/darkdirt.png
   baseTurf: FloorDirt
   isSubfloor: true
   footstepSounds:

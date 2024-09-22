@@ -1,9 +1,19 @@
 ﻿[game]
-# Straight in-game baby
-lobbyenabled = false
+# Changes the name of the server as it appears in the lobby and launcher.
+hostname = "Ironhold"
+# Enables the lobby instead of straight up throwing clients into a game.
+lobbyenabled = true
+maxplayers = 10
 # Dev map for faster loading & convenience
-map = "Dev"
+map = "ZDev"
 role_timers = false
+map_rotation = false
+
+
+[net]
+# Reducing tickrate to 30 is basically unnoticeable
+# but reduces server, client and network load dramatically.
+tickrate = 30
 
 [ghost]
 role_time = 0.5
@@ -31,3 +41,15 @@ preload_grids = false
 
 [admin]
 see_own_notes = true
+
+[auth]
+# Enforces authentication so that ALL connecting clients must have a proper account.
+# Otherwise, guest logins are allowed.
+# Possible values here are: 0 (optional), 1 (required), 2 (disabled)
+mode = 1
+
+[log]
+enabled = true
+
+[prof]
+enable = true

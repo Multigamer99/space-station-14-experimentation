@@ -54,6 +54,7 @@
           collection: MetalBreak
   - type: StaticPrice
     price: 30
+  - type: ZClimbable
 
 - type: entity
   id: ReinforcedGirder
@@ -97,6 +98,7 @@
                 collection: MetalBreak
     - type: StaticPrice
       price: 130
+    - type: ZClimbable
 
 - type: entity
   id: ClockworkGirder
@@ -140,3 +142,4 @@
             - !type:PlaySoundBehavior
               sound:
                 collection: MetalBreak
+    - type: ZClimbable

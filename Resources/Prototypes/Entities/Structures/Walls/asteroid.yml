@@ -47,6 +47,7 @@
           path: /Audio/Effects/break_stone.ogg
           params:
             volume: -6
+  - type: ZClimbable
 
 # Ore veins
 - type: entity

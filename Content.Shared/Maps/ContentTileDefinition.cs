@@ -39,6 +39,10 @@ namespace Content.Shared.Maps
 
         [DataField("isSubfloor")] public bool IsSubFloor { get; private set; }
 
+        [DataField("canFallThrough")] public bool CanFall { get; private set; }
+
+        [DataField("allowLightPass")] public bool AllowLightpass { get; private set; }
+
         [DataField("baseTurf")]
         public string BaseTurf { get; private set; } = string.Empty;
 

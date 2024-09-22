@@ -12,7 +12,7 @@
     - type: RCDDeconstructable
       cost: 6
       delay: 4
-      fx: EffectRCDDeconstruct4  
+      fx: EffectRCDDeconstruct4
     - type: CanBuildWindowOnTop
     - type: Sprite
       drawdepth: Walls
@@ -87,6 +87,7 @@
             True: { visible: True }
             False: { visible: False }
     - type: AnimationPlayer
+    - type: ZClimbable
 
 - type: entity
   id: ClockworkGrille
@@ -146,6 +147,8 @@
               node: start
             - !type:DoActsBehavior
               acts: ["Destruction"]
+    - type: ZClimbable
+      canClimb: false
 
 - type: entity
   id: ClockworkGrilleBroken
@@ -233,4 +236,4 @@
     - type: Construction
       graph: GrilleDiagonal
       node: clockworkGrilleDiagonal
-      
+

@@ -3,7 +3,20 @@
   name: tiles-space
   friction: 0
   isSubfloor: true
+  allowLightPass: true
   isSpace: true
+  sturdy: false
+  thermalConductivity: 0.4
+  heatCapacity: 700000
+
+- type: tile
+  id: Gap
+  name: tiles-gap
+  sprite: /Textures/Tiles/blank.png
+  friction: 0
+  isSubfloor: true
+  canFallThrough: true
+  allowLightPass: true
   sturdy: false
   thermalConductivity: 0.4
   heatCapacity: 700000

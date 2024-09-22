@@ -29,6 +29,12 @@
             Captain: [ -1, -1 ]
 
 - type: gameMap
+  id: ZDev
+  mapName: ZDev
+  mapPath: /Maps/Rogue/devmapzlevel.yml
+  minPlayers: 0
+
+- type: gameMap
   id: TestTeg
   mapName: Test TEG
   mapPath: /Maps/Test/test_teg.yml

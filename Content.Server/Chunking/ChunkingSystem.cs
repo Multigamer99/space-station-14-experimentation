@@ -52,6 +52,7 @@ public sealed class ChunkingSystem : EntitySystem
             return chunks;
 
         var enlargement = viewEnlargement ?? chunkSize;
+
         AddViewerChunks(player, chunks, indexPool, chunkSize, enlargement);
         foreach (var uid in session.ViewSubscriptions)
         {
@@ -65,7 +66,8 @@ public sealed class ChunkingSystem : EntitySystem
         Dictionary<NetEntity, HashSet<Vector2i>> chunks,
         ObjectPool<HashSet<Vector2i>> indexPool,
         int chunkSize,
-        float viewEnlargement)
+        float viewEnlargement,
+        MapId? overrideMap = null)
     {
         if (!_xformQuery.TryGetComponent(viewer, out var xform))
             return;
@@ -74,7 +76,12 @@ public sealed class ChunkingSystem : EntitySystem
         var bounds = _baseViewBounds.Translated(pos).Enlarged(viewEnlargement);
 
         var state = new QueryState(chunks, indexPool, chunkSize, bounds, _transform, EntityManager);
-        _mapManager.FindGridsIntersecting(xform.MapID, bounds, ref state, AddGridChunks, true);
+        var targetMap = overrideMap != null ? (MapId)overrideMap : xform.MapID;
+
+        _mapManager.FindGridsIntersecting(targetMap, bounds, ref state, AddGridChunks, true);
+
+        //Vrell - Recursive for now, gotta make it tied to z levels later.
+        if(targetMap.Value != 1) AddViewerChunks(viewer, chunks, indexPool, chunkSize, viewEnlargement, new(targetMap.Value - 1));
     }
 
     private static bool AddGridChunks(

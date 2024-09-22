@@ -53,7 +53,7 @@ public sealed class ParallaxManager : IParallaxManager
     public async void LoadDefaultParallax()
     {
         _sawmill.Level = LogLevel.Info;
-        await LoadParallaxByName("Default");
+        await LoadParallaxByName("Blank");
     }
 
     public async Task LoadParallaxByName(string name)
