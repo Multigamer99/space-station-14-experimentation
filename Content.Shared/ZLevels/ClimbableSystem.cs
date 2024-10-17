@@ -18,6 +18,7 @@ public sealed partial class ZClimbableSystem : EntitySystem
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
 
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
@@ -28,30 +29,43 @@ public sealed partial class ZClimbableSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ZClimbableComponent, BeforeInteractHandEvent>(TryClimb);
+        SubscribeLocalEvent<ZClimbableComponent, InteractHandEvent>(TryClimb);
         SubscribeLocalEvent<ZClimbableComponent, AddClimbDoAfterEvent>(DoClimb);
     }
 
-    private void TryClimb(EntityUid uid, ZClimbableComponent comp, BeforeInteractHandEvent args)
+    private void TryClimb(EntityUid uid, ZClimbableComponent comp, InteractHandEvent args)
     {
         if (args.Handled || !HasComp<ZClimbableComponent>(args.Target))
             return;
 
+        if(!comp.CanClimb) return;
+
         //Checking if we can climb
-        if (!TryComp<TransformComponent>(args.Target, out var xform))
+        if (!TryComp<TransformComponent>(args.User, out var xform))
             return;
         if(!(xform.MapUid is EntityUid trueMapId)) return;
         if(!_entityManager.TryGetComponent<MapComponent>(trueMapId, out var mapComp)) return;
         if(!(mapComp is MapComponent trueMapComp)) return;
         if(trueMapComp.UpperZBound <= xform.MapID.Value) return;
 
-        var doAfterEventArgs = new DoAfterArgs(EntityManager, uid, comp.ClimbTime, new AddClimbDoAfterEvent(), args.Target, args.Target, uid)
+        if(comp.NeedsSpaceAbove) {
+            var overMapID = new MapId(xform.MapID.Value + 1);
+            var overPlayerPos = new MapCoordinates(xform.MapPosition.Position, overMapID);
+            if(!_mapSystem.TryGetMap(overMapID, out var mapUid)) return;
+            if(!_entityManager.TryGetComponent<MapGridComponent>(mapUid, out var gridComp)) return;
+            if(!(gridComp is MapGridComponent trueGridComp)) return;
+            if(!((ContentTileDefinition)_tileDefinitionManager[trueGridComp.GetTileRef(overPlayerPos).Tile.TypeId]).CanFall) return;
+        }
+
+
+
+        var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, comp.ClimbTime, new AddClimbDoAfterEvent(), args.Target, args.Target)
         {
             BreakOnMove = true,
             BreakOnWeightlessMove = true,
             BreakOnDamage = false,
             NeedHand = true,
-            DistanceThreshold = 2f // shorter than default but still feels good //Vrell - ha i copypasta'd this
+            DistanceThreshold = 0.5f
         };
 
         _doAfter.TryStartDoAfter(doAfterEventArgs);
@@ -60,6 +74,8 @@ public sealed partial class ZClimbableSystem : EntitySystem
 
     private void DoClimb(EntityUid uid, ZClimbableComponent comp, AddClimbDoAfterEvent args)
     {
+        if (!args.DoAfter.Completed) return;
+
         var user = args.Args.User;
 
         if (!TryComp<ZClimbableComponent>(args.Args.Target, out var climbable))
