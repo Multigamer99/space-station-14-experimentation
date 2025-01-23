@@ -17,5 +17,10 @@ namespace Content.Shared.ZLevel.Fallable.Components
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField("preventFalls")]
         public bool PreventFalls = false;
+
+        //Vrell - the number of seconds that you can be in air before falling.
+        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField("coyoteTime")]
+        public float CoyoteTime = 0f;
     }
 }
